@@ -11,6 +11,9 @@ mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('Conectado a MongoDB Atlas'))
   .catch(error => console.error('Error conectando a MongoDB:', error));
 
+app.use('/games', require('./routes/games'));
+app.use('/reviews', require('./routes/reviews'));
+
 app.get('/', (req, res) => {
   res.json({ message: 'API de Gametracker funcionando' });
 });
