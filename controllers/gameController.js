@@ -28,4 +28,13 @@ const updateGame = async (req, res) => {
   }
 };
 
-module.exports = { getGames, createGame, updateGame };
+const deleteGame = async (req, res) => {
+  try {
+    await Game.findByIdAndDelete(req.params.id);
+    res.json({ message: 'Juego eliminado' });
+  } catch (error) {
+    res.status(500).json({ error: 'Error al eliminar juego' });
+  }
+};
+
+module.exports = { getGames, createGame, updateGame, deleteGame};
