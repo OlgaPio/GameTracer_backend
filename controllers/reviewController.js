@@ -30,4 +30,23 @@ const createReview = async (req, res) => {
   }
 };
 
-module.exports = { getReviews, createReview };
+const updateReview = async (req, res) => {
+  try {
+    const review = await Review.findByIdAndUpdate(req.params.id, req.body, {new: true});
+    res.json(review);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al actualizar reseña' });
+  }
+};
+
+
+const deleteReview = async (req, res) => {
+  try {
+    await Review.findByIdAndDelete(req.params.id);
+    res.json({ message: 'Reseña eliminada' });
+  } catch (error) {
+    res.status(500).json({ error: 'Error al eliminar reseña' });
+  }
+};
+
+module.exports = { getReviews, createReview, updateReview, deleteReview};
